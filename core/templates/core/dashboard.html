@@ -1,0 +1,85 @@
+<html> ERP JM </html>
+
+{% block content %}
+<nav>
+    <a href="'#"> ERP JM</a>
+    <span>Bienvenido, {{ user.first_name|default:user.username}}</span>
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+</nav>
+
+<h2>Dashboard</h2>
+<p>Roles asignados: <strong> {{ roles|join:", "}}</strong></p>
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.suppliers > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Suppliers</h3>
+        <p>{% if permissions.suppliers == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.materials > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Materials</h3>
+        <p>{% if permissions.materials == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.purchases > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Purchases</h3>
+        <p>{% if permissions.purchases == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.sales > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Sales</h3>
+        <p>{% if permissions.sales == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.inventory > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Inventory</h3>
+        <p>{% if permissions.inventory == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.accouting > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Accouting</h3>
+        <p>{% if permissions.accouting == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+
+<div style = "display: flex; flex-wrap: wrap; gap: 10px">
+    {% if permissions.reporting > 0 %}
+    <div style="border: 1px solid #000; padding: 10px; width: 200px">
+        <h3>Reporting</h3>
+        <p>{% if permissions.reporting == 1 %}View only{% else %}Read and write{% endif %}</p>
+        <a href="#">Acceso</a>
+    </div>
+    {% endif %}
+</div>
+
+{% if permissions.customers == 0 and permissions.suppliers == 0 and permissions.materials == 0 and permissions.purchases == 0 and permissions.sales == 0 and permissions.inventory == 0 and permissions.accouting == 0 and permissions.reporting == 0 %}
+    <div style="border: 1px solid red; padding: 10px; width: 20px">
+        <h4>No tienes permisos asignados</h4>
+        <p>
+            No cuentas con permisos para ninguna área. Contacta a tu administrador para tener acceso.
+        </p>
+    </div>
+{% endif %}
+{% endblock %}
